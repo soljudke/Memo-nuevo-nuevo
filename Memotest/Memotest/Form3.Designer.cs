@@ -56,6 +56,10 @@
             this.lblTiempo.Size = new System.Drawing.Size(0, 60);
             this.lblTiempo.TabIndex = 14;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

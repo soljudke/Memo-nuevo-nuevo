@@ -25,12 +25,11 @@ namespace Memotest
         Tarjetas tarje = new Tarjetas();
         List<Tarjetas> listTarjetas = new List<Tarjetas>();
         List<Tarjetas> listRandom = new List<Tarjetas>();
-        int x, y, ParejaActual, primerI, s, j;        
+        int x, y, ParejaActual, primerI, s, j,z;        
         int CantClick = 0;
         int Ganando = 0;
         Random random = new Random();
         List<int> listint = new List<int>();
-        List<int> posRandom = new List<int>();
         private void Form3_Load(object sender, EventArgs e)
         {
             Inicio();
@@ -38,11 +37,14 @@ namespace Memotest
         private void Inicio()
         {
             jug.Traemelo(Jugador.username);
-            counter = 60;
-            x = 0;
-            y = 0;
-            s = 0;
-            j = 0;
+            counter = 90;
+            x = 120;
+            y = 120;
+            z = 390;
+            s = 120;
+            j = 120;
+            listRandom.Clear();
+            listTarjetas.Clear();
             timer1.Interval = 1000;
             timer1.Start();
             lblTiempo.Text = counter.ToString();
@@ -62,16 +64,21 @@ namespace Memotest
                 fondos[i2].Name = listRandom[i2].id.ToString();
                 fondos[i2].BringToFront();
 
-                if (i2 >= 0 && i2 < 10)
+                if (i2 >= 0 && i2 < 8)
                 {
 
-                    fondos[i2].Location = new Point(s, 94);
-                    s = fondos[i2].Right + 55;
+                    fondos[i2].Location = new Point(s, 84);
+                    s = fondos[i2].Right + 35;
                 }
-                if (i2 >= 10 && i2 < listRandom.Count())
+                if (i2 >= 8 && i2 < 16)
                 {
-                    fondos[i2].Location = new Point(j, 340);
-                    j = fondos[i2].Right + 55;
+                    fondos[i2].Location = new Point(j, 280);
+                    j = fondos[i2].Right + 35;
+                }
+                if (i2 >= 16 && i2 < listRandom.Count())
+                {
+                    fondos[i2].Location = new Point(z, 480);
+                    z = fondos[i2].Right + 35;
                 }
                 this.Controls.Add(fondos[i2]);
             }
@@ -85,16 +92,16 @@ namespace Memotest
                 estaPic.BackColor = Color.Transparent;
                 estaPic.SendToBack();
                 estaPic.Name = listRandom[i].id.ToString();
-                posRandom.Add(x);
+                
                 if (i >= 0 && i < 10)
                 {
                     estaPic.Location = new Point(x, 94);
-                    x = estaPic.Right + 55;
+                    x = estaPic.Right + 35;
                 }
                 if (i >= 10 && i < listRandom.Count())
                 {
                     estaPic.Location = new Point(y, 340);
-                    y = estaPic.Right + 55;
+                    y = estaPic.Right + 35;
 
                 }
                 this.Controls.Add(estaPic);
@@ -102,6 +109,9 @@ namespace Memotest
             }
 
         }
+
+       
+
         PictureBox picAnterior;
         PictureBox img;
         PictureBox imgAnterior;
@@ -165,8 +175,9 @@ namespace Memotest
                 }
             }
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick_1(object sender, EventArgs e)
         {
+
             counter--;
             if (counter == 0)
             {
