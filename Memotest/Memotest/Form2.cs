@@ -28,6 +28,8 @@ namespace Memotest
         int x, y, ParejaActual, primerI, s, j;
         int CantClick = 0;
         int Ganando = 0;
+        int Aciertos = 0;
+        int Mal = 0;
         Random random = new Random();
         List<int> listint = new List<int>();
         List<int> posRandom = new List<int>();
@@ -39,6 +41,23 @@ namespace Memotest
         private void Inicio()
         {
             jug.Traemelo(Jugador.username);
+            for (int i = 0; i < listRandom.Count(); i++)
+            {
+                if (pictures.Count() > 0)
+                    pictures[i].Dispose();
+                if (fondos.Count() > 0)
+                    fondos[i].Dispose();
+            } 
+            listRandom.Clear();
+            listTarjetas.Clear();
+            ParejaActual = 0;
+            primerI = 0;
+            CantClick = 0;
+            Aciertos = 0;
+            Mal = 0;
+            label3.Text = Aciertos.ToString();
+            label4.Text = Mal.ToString();
+            Ganando = 0;
             counter = 60;
             x = 120;
             y = 120;
@@ -133,6 +152,7 @@ namespace Memotest
                             (new SoundPlayer(Configuracion.RootFolder + "aplau.wav")).Play();
                             MessageBox.Show("Si");
                             Ganando++;
+                            label3.Text = Aciertos.ToString();
                             CantClick = 0;
                             img.Visible = false;
                             imgAnterior.Visible = false;
@@ -145,6 +165,8 @@ namespace Memotest
                             (new SoundPlayer(Configuracion.RootFolder + "sad.wav")).Play();
                             MessageBox.Show("No");
                             CantClick = 0;
+                            Mal++;
+                            label4.ToString();
                             pic.Visible = true;
                             picAnterior.Visible = true;
                         }
@@ -152,15 +174,29 @@ namespace Memotest
                     if (Ganando == (listRandom.Count() / 2))
                     {
                         timer1.Stop();
-                        jug.nivelmemo++;
-                        jug.Modificar();
-                        CustomMessageForm mimsgg = new CustomMessageForm("Nivel");
-                        DialogResult resultt = mimsgg.ShowDialog();
-                        if (resultt == DialogResult.OK)
+                        if (jug.nivelmemo == 2)
                         {
-                            Form3 el = new Form3();
-                            el.Show();
-                            this.Close();
+                            jug.nivelmemo++;
+                            jug.Modificar();
+                            CustomMessageForm mimsgg = new CustomMessageForm("Nivel");
+                            DialogResult resultt = mimsgg.ShowDialog();
+                            if (resultt == DialogResult.OK)
+                            {
+                                Niveles el = new Niveles();
+                                el.Show();
+                                this.Close();
+                            }
+                        }
+                        else
+                        {
+                            CustomMessageForm mimsgg = new CustomMessageForm("Ganaste");
+                            DialogResult resultt = mimsgg.ShowDialog();
+                            if (resultt == DialogResult.OK)
+                            {
+                                Niveles el = new Niveles();
+                                el.Show();
+                                this.Close();
+                            }
                         }
                     }
                 }

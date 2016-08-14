@@ -34,11 +34,9 @@ namespace Memotest
             {
                 case "Ganaste":
                     pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/feliz.png");
-                    btnOk.Visible = false;
-                    btnSi.Visible = true;
-                    btnNo.Visible = true;
+                    btnOk.Visible = true;
                     label1.Text = "¡Felicidades, ganaste!";
-                    label2.Text = "¿Jugamos de nuevo?";
+                    label2.Text = "";
                     break;
                 case "Perdiste":
                     pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/triste.png");
@@ -54,15 +52,7 @@ namespace Memotest
                     btnSi.Visible = false;
                     btnOk.Visible = true;
                     label1.Text = "¡Felicidades!";
-                    label2.Text = "Pasaste al segundo nivel";
-                    break;
-                case "Silabas":
-                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/aplausos.gif");
-                    btnNo.Visible = false;
-                    btnSi.Visible = false;
-                    btnOk.Visible = true;
-                    label1.Text = "¡Felicidades!";
-                    label2.Text = "¡Completaste el nivel!";
+                    label2.Text = "Pasaste al próximo nivel";
                     break;
                 case "Fin":
                     pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/aplausos.gif");

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Media;
 namespace Memotest
@@ -24,12 +25,16 @@ namespace Memotest
         PictureBox[] fondos;
         Jugador jug = new Jugador();
         int counter;
+        int counter2;
+        bool flag=false;
         Tarjetas tarje = new Tarjetas();
         List<Tarjetas> listTarjetas = new List<Tarjetas>();
         List<Tarjetas> listRandom = new List<Tarjetas>();
         int x, y, ParejaActual, primerI, s, j;
         int CantClick = 0;
         int Ganando = 0;
+        int Aciertos = 0;
+        int Mal = 0;
         Random random = new Random();
         List<int> listint = new List<int>();
         List<int> posRandom = new List<int>();
@@ -40,8 +45,26 @@ namespace Memotest
         //1382x744
         private void Inicio()
         {
+            for (int i = 0; i < listRandom.Count(); i++)
+            {
+                if (pictures.Count() > 0)
+                    pictures[i].Dispose();
+                if (fondos.Count() > 0)
+                    fondos[i].Dispose();
+            }
+            listRandom.Clear();
+            listTarjetas.Clear();
+            ParejaActual = 0;
+            primerI = 0;
+            CantClick = 0;
+            Aciertos = 0;
+            Mal = 0;
+            label3.Text = "0";
+            label4.Text = "0";
+            Ganando = 0;
             jug.Traemelo(Jugador.username);
             counter = 60;
+            counter2 = 5;
             x = 150;
             y = 150;
             s = 150;
@@ -117,6 +140,7 @@ namespace Memotest
 
         }
 
+       
 
         PictureBox picAnterior;
         PictureBox img;
@@ -145,15 +169,16 @@ namespace Memotest
                         if (ParejaActual == listRandom[i].pareja)
                         {
 
-
                             SoundPlayer simpleSound = (new SoundPlayer(Configuracion.RootFolder + "aplau.wav"));
                             simpleSound.Play();
-                            MessageBox.Show("Si");
                             Ganando++;
+                            label3.Text = Ganando.ToString();
+                            //NO SE DESTAPA LA SEGUNDA.
+                            //Thread.Sleep(5000);
                             CantClick = 0;
                             img.Visible = false;
-                            imgAnterior.Visible = false;
-                            Application.DoEvents();
+                                imgAnterior.Visible = false;
+                                Application.DoEvents(); 
 
                         }
                         else
@@ -161,7 +186,9 @@ namespace Memotest
                             
                             (new SoundPlayer(Configuracion.RootFolder + "sad.wav")).Play();
                             MessageBox.Show("No");
+                            Mal++;
                             CantClick = 0;
+                            label4.Text = Mal.ToString();
                             pic.Visible = true;
                             picAnterior.Visible = true;
                         }
@@ -169,18 +196,43 @@ namespace Memotest
                     if (Ganando == (listRandom.Count() / 2))
                     {
                         timer1.Stop();
-                        jug.nivelmemo++;
-                        jug.Modificar();
-                        CustomMessageForm mimsgg = new CustomMessageForm("Nivel");
-                        DialogResult resultt = mimsgg.ShowDialog();
-                        if (resultt == DialogResult.OK)
+                        if (jug.nivelmemo==1)
                         {
-                            Niveles el = new Niveles();
-                            el.Show();
-                            this.Close();
+                            jug.nivelmemo++;
+                            jug.Modificar();
+                            CustomMessageForm mimsgg = new CustomMessageForm("Nivel");
+                            DialogResult resultt = mimsgg.ShowDialog();
+                            if (resultt == DialogResult.OK)
+                            {
+                                Niveles el = new Niveles();
+                                el.Show();
+                                this.Close();
+                            }
                         }
+                        else
+                        {
+                            CustomMessageForm mimsgg = new CustomMessageForm("Ganaste");
+                            DialogResult resultt = mimsgg.ShowDialog();
+                            if (resultt == DialogResult.OK)
+                            {
+                                Niveles el = new Niveles();
+                                el.Show();
+                                this.Close();
+                            }
+                        }
+                        
                     }
                 }
+            }
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            counter2--;
+            if (counter2==0)
+            {
+                timer2.Stop();
+                counter2 = 5;
+                flag = true;
             }
         }
         private void timer1_Tick(object sender, EventArgs e)

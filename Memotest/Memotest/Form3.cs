@@ -28,8 +28,9 @@ namespace Memotest
         int x, y, ParejaActual, primerI, s, j,z;        
         int CantClick = 0;
         int Ganando = 0;
+        int Aciertos = 0;
+        int Mal = 0;
         Random random = new Random();
-        List<int> listint = new List<int>();
         private void Form3_Load(object sender, EventArgs e)
         {
             Inicio();
@@ -37,6 +38,13 @@ namespace Memotest
         private void Inicio()
         {
             jug.Traemelo(Jugador.username);
+            for (int i = 0; i < listRandom.Count(); i++)
+            {
+                if (pictures.Count() > 0)
+                    pictures[i].Dispose();
+                if (fondos.Count() > 0)
+                    fondos[i].Dispose();
+            }
             counter = 90;
             x = 120;
             y = 120;
@@ -45,12 +53,20 @@ namespace Memotest
             j = 120;
             listRandom.Clear();
             listTarjetas.Clear();
+            ParejaActual = 0;
+            primerI = 0;
+            CantClick = 0;
+            Aciertos = 0;
+            Mal = 0;
+            label3.Text = Aciertos.ToString();
+            label4.Text = Mal.ToString();
+            Ganando = 0; 
             timer1.Interval = 1000;
             timer1.Start();
             lblTiempo.Text = counter.ToString();
             lblTiempo.ForeColor = Color.Black;
             listTarjetas = tarje.Traemelos3();
-            var random = new Random();
+            random = new Random();
             listRandom = listTarjetas.OrderBy(x => random.Next()).ToList();
             pictures = new PictureBox[listRandom.Count()];
             fondos = new PictureBox[listRandom.Count()];
@@ -109,9 +125,6 @@ namespace Memotest
             }
 
         }
-
-       
-
         PictureBox picAnterior;
         PictureBox img;
         PictureBox imgAnterior;
@@ -142,6 +155,7 @@ namespace Memotest
                             (new SoundPlayer(Configuracion.RootFolder + "aplau.wav")).Play();
                             MessageBox.Show("Si");
                             Ganando++;
+                            label3.Text = Aciertos.ToString();
                             CantClick = 0;
                             img.Visible = false;
                             imgAnterior.Visible = false;
@@ -153,6 +167,8 @@ namespace Memotest
 
                             (new SoundPlayer(Configuracion.RootFolder + "sad.wav")).Play();
                             MessageBox.Show("No");
+                            Mal++;
+                            label4.Text = Mal.ToString();
                             CantClick = 0;
                             pic.Visible = true;
                             picAnterior.Visible = true;
@@ -161,9 +177,8 @@ namespace Memotest
                     if (Ganando == (listRandom.Count() / 2))
                     {
                         timer1.Stop();
-                        jug.nivelmemo++;
-                        jug.Modificar();
-                        CustomMessageForm mimsgg = new CustomMessageForm("Nivel");
+
+                        CustomMessageForm mimsgg = new CustomMessageForm("Fin");
                         DialogResult resultt = mimsgg.ShowDialog();
                         if (resultt == DialogResult.OK)
                         {
