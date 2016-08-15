@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ayuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ayuda.Designer.cs">
+      <DependentUpon>Ayuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuracion.cs" />
     <Compile Include="CustomMessageForm.cs">
       <SubType>Form</SubType>
@@ -88,6 +94,9 @@
     <Compile Include="Usuario.Designer.cs">
       <DependentUpon>Usuario.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ayuda.resx">
+      <DependentUpon>Ayuda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomMessageForm.resx">
       <DependentUpon>CustomMessageForm.cs</DependentUpon>
     </EmbeddedResource>

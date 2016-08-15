@@ -19,14 +19,15 @@ namespace Memotest
             MinimizeBox = false;
             MaximizeBox = false;
             this.WindowState = FormWindowState.Maximized;
-            
+            this.BackgroundImage = System.Drawing.Image.FromFile(Configuracion.RootFolder + "Inicio.jpg");
+
         }
         PictureBox[] pictures;
         PictureBox[] fondos;
         Jugador jug = new Jugador();
         int counter;
         int counter2;
-        bool flag=false;
+        int counter3;
         Tarjetas tarje = new Tarjetas();
         List<Tarjetas> listTarjetas = new List<Tarjetas>();
         List<Tarjetas> listRandom = new List<Tarjetas>();
@@ -59,12 +60,13 @@ namespace Memotest
             CantClick = 0;
             Aciertos = 0;
             Mal = 0;
-            label3.Text = "0";
-            label4.Text = "0";
+            label3.Text = Aciertos.ToString();
+            label4.Text = Mal.ToString();
             Ganando = 0;
             jug.Traemelo(Jugador.username);
             counter = 60;
-            counter2 = 5;
+            counter2 = 3;
+            counter3 = 3;
             x = 150;
             y = 150;
             s = 150;
@@ -83,24 +85,17 @@ namespace Memotest
                 fondos[i2] = new PictureBox();
                 fondos[i2].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "tarjAtras.jpg");
                 fondos[i2].AutoSize = true;
-
                 fondos[i2].BackColor = Color.Transparent;
                 fondos[i2].Click += new EventHandler(fondos_Click);
                 fondos[i2].Name = listRandom[i2].id.ToString();
                 fondos[i2].BringToFront();
-                //posRandom.Add(y);
-
-
                 if (i2 >= 0 && i2 < 6)
                 {
-
                     fondos[i2].Location = new Point(s, 94);
                     s = fondos[i2].Right + 55;
                 }
                 if (i2 >= 6 && i2 < listRandom.Count())
                 {
-
-
                     fondos[i2].Location = new Point(j, 340);
                     j = fondos[i2].Right + 55;
                 }
@@ -108,43 +103,47 @@ namespace Memotest
             }
             for (int i = 0; i < listRandom.Count(); i++)
             {
-
                 PictureBox estaPic = new PictureBox();
                 estaPic.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + listRandom[i].foto);
                 estaPic.AutoSize = true;
-
                 estaPic.BackColor = Color.Transparent;
                 estaPic.SendToBack();
                 estaPic.Name = listRandom[i].id.ToString();
                 posRandom.Add(x);
                 if (i >= 0 && i < 6)
                 {
-
                     estaPic.Location = new Point(x, 94);
-
                     x = estaPic.Right + 55;
-
                 }
                 if (i >= 6 && i < listRandom.Count())
                 {
                     estaPic.Location = new Point(y, 340);
-
                     y = estaPic.Right + 55;
-
                 }
                 this.Controls.Add(estaPic);
                 pictures[i] = estaPic;
             }
-
-
-
-        }
-
-       
-
+        }     
         PictureBox picAnterior;
         PictureBox img;
         PictureBox imgAnterior;
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            Ayuda ayu = new Ayuda();
+            timer1.Stop();
+            ayu.ShowDialog();
+            timer1.Start();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Niveles el = new Niveles();
+            el.Show();
+            this.Close();
+        }
+
+        PictureBox fotito;
         protected void fondos_Click(object sender, EventArgs e)
         {
             var pic = sender as PictureBox;
@@ -168,29 +167,30 @@ namespace Memotest
                         pic.Visible = false;
                         if (ParejaActual == listRandom[i].pareja)
                         {
-
                             SoundPlayer simpleSound = (new SoundPlayer(Configuracion.RootFolder + "aplau.wav"));
                             simpleSound.Play();
                             Ganando++;
                             label3.Text = Ganando.ToString();
-                            //NO SE DESTAPA LA SEGUNDA.
-                            //Thread.Sleep(5000);
-                            CantClick = 0;
-                            img.Visible = false;
-                                imgAnterior.Visible = false;
-                                Application.DoEvents(); 
+                            for (int j = 0; j < listRandom.Count(); j++)
+                            {
+                                fondos[j].Click -= new EventHandler(fondos_Click);
+                            }
+                            this.timer2.Start();
 
                         }
                         else
                         {
                             
                             (new SoundPlayer(Configuracion.RootFolder + "sad.wav")).Play();
-                            MessageBox.Show("No");
                             Mal++;
-                            CantClick = 0;
+                            fotito = pic;
                             label4.Text = Mal.ToString();
-                            pic.Visible = true;
-                            picAnterior.Visible = true;
+                            for (int j = 0; j < listRandom.Count(); j++)
+                            {
+                                fondos[j].Click -= new EventHandler(fondos_Click);
+                            }
+                            this.timer3.Start();
+                            
                         }
                     }
                     if (Ganando == (listRandom.Count() / 2))
@@ -225,16 +225,6 @@ namespace Memotest
                 }
             }
         }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            counter2--;
-            if (counter2==0)
-            {
-                timer2.Stop();
-                counter2 = 5;
-                flag = true;
-            }
-        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             counter--;
@@ -249,6 +239,8 @@ namespace Memotest
                 }
                 else if (result == DialogResult.No)
                 {
+                    Niveles el = new Niveles();
+                    el.Show();
                     this.Close();
                 }
             }
@@ -256,5 +248,39 @@ namespace Memotest
                 lblTiempo.ForeColor = Color.Red;
             lblTiempo.Text = counter.ToString();
         }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            counter2--;
+             if (counter2==0)
+             {
+                 CantClick = 0;
+                  img.Visible = false;
+                  imgAnterior.Visible = false;
+                 Application.DoEvents();
+                for (int j = 0; j < listRandom.Count(); j++)
+                {
+                    fondos[j].Click += new EventHandler(fondos_Click);
+                }
+                counter2 = 3;
+                timer2.Stop();
+             }
+        }
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            counter3--;
+            if (counter3 == 0)
+            {
+                CantClick = 0;
+               fotito.Visible = true;
+                picAnterior.Visible = true;
+                Application.DoEvents();
+                for (int j = 0; j < listRandom.Count(); j++)
+                {
+                    fondos[j].Click += new EventHandler(fondos_Click);
+                }
+                counter3 = 3;
+                timer3.Stop();
+            }
+        }   
     }
 }

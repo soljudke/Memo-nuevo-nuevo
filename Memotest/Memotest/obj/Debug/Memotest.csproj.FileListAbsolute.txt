@@ -42,3 +42,4 @@ C:\Users\c\Desktop\Memo-nuevo-nuevo\Memotest\Memotest\obj\Debug\Memotest.Usuario
 C:\Users\c\Desktop\Memo-nuevo-nuevo\Memotest\Memotest\obj\Debug\Memotest.csproj.GenerateResource.Cache
 C:\Users\c\Desktop\Memo-nuevo-nuevo\Memotest\Memotest\bin\Debug\Memotest.exe
 C:\Users\c\Desktop\Memo-nuevo-nuevo\Memotest\Memotest\bin\Debug\Memotest.pdb
+C:\Users\c\Desktop\Memo-nuevo-nuevo\Memotest\Memotest\obj\Debug\Memotest.Ayuda.resources

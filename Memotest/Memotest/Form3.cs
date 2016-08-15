@@ -17,15 +17,18 @@ namespace Memotest
             InitializeComponent();
             MinimizeBox = false;
             this.WindowState = FormWindowState.Maximized;
+            this.BackgroundImage = System.Drawing.Image.FromFile(Configuracion.RootFolder + "Inicio.jpg");
         }
         PictureBox[] pictures;
         PictureBox[] fondos;
         Jugador jug = new Jugador();
         int counter;
+        int counter2;
+        int counter3;
         Tarjetas tarje = new Tarjetas();
         List<Tarjetas> listTarjetas = new List<Tarjetas>();
         List<Tarjetas> listRandom = new List<Tarjetas>();
-        int x, y, ParejaActual, primerI, s, j,z;        
+        int x, y, ParejaActual, primerI, s, j,z,w;        
         int CantClick = 0;
         int Ganando = 0;
         int Aciertos = 0;
@@ -35,6 +38,9 @@ namespace Memotest
         {
             Inicio();
         }
+
+       
+
         private void Inicio()
         {
             jug.Traemelo(Jugador.username);
@@ -46,9 +52,12 @@ namespace Memotest
                     fondos[i].Dispose();
             }
             counter = 90;
+            counter2 = 3;
+            counter3 = 3;
             x = 120;
             y = 120;
             z = 390;
+            w = 390;
             s = 120;
             j = 120;
             listRandom.Clear();
@@ -109,16 +118,21 @@ namespace Memotest
                 estaPic.SendToBack();
                 estaPic.Name = listRandom[i].id.ToString();
                 
-                if (i >= 0 && i < 10)
+                if (i >= 0 && i < 8)
                 {
-                    estaPic.Location = new Point(x, 94);
+                    estaPic.Location = new Point(x, 84);
                     x = estaPic.Right + 35;
                 }
-                if (i >= 10 && i < listRandom.Count())
+                if (i >= 8 && i < 16)
                 {
-                    estaPic.Location = new Point(y, 340);
+                    estaPic.Location = new Point(y, 280);
                     y = estaPic.Right + 35;
 
+                }
+                if (i >= 16 && i < listRandom.Count())
+                {
+                    estaPic.Location = new Point(w, 480);
+                    w = estaPic.Right + 35;
                 }
                 this.Controls.Add(estaPic);
                 pictures[i] = estaPic;
@@ -127,7 +141,25 @@ namespace Memotest
         }
         PictureBox picAnterior;
         PictureBox img;
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            Ayuda ayu = new Ayuda();
+            timer1.Stop();
+            ayu.ShowDialog();
+            timer1.Start();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+            Niveles el = new Niveles();
+            el.Show();
+            this.Close();
+        }
+
         PictureBox imgAnterior;
+        PictureBox fotito;
         protected void fondos_Click(object sender, EventArgs e)
         {
             var pic = sender as PictureBox;
@@ -153,25 +185,27 @@ namespace Memotest
                         {
 
                             (new SoundPlayer(Configuracion.RootFolder + "aplau.wav")).Play();
-                            MessageBox.Show("Si");
                             Ganando++;
-                            label3.Text = Aciertos.ToString();
-                            CantClick = 0;
-                            img.Visible = false;
-                            imgAnterior.Visible = false;
-                            Application.DoEvents();
+                            label3.Text = Ganando.ToString();
+                            for (int j = 0; j < listRandom.Count(); j++)
+                            {
+                                fondos[j].Click -= new EventHandler(fondos_Click);
+                            }
+                            this.timer2.Start();
 
                         }
                         else
                         {
 
                             (new SoundPlayer(Configuracion.RootFolder + "sad.wav")).Play();
-                            MessageBox.Show("No");
                             Mal++;
+                            fotito = pic;
                             label4.Text = Mal.ToString();
-                            CantClick = 0;
-                            pic.Visible = true;
-                            picAnterior.Visible = true;
+                            for (int j = 0; j < listRandom.Count(); j++)
+                            {
+                                fondos[j].Click -= new EventHandler(fondos_Click);
+                            }
+                            this.timer3.Start();
                         }
                     }
                     if (Ganando == (listRandom.Count() / 2))
@@ -205,6 +239,8 @@ namespace Memotest
                 }
                 else if (result == DialogResult.No)
                 {
+                    Niveles niv = new Niveles();
+                    niv.Show();
                     this.Close();
                 }
             }
@@ -212,5 +248,39 @@ namespace Memotest
                 lblTiempo.ForeColor = Color.Red;
             lblTiempo.Text = counter.ToString();
         }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            counter2--;
+            if (counter2 == 0)
+            {
+                CantClick = 0;
+                img.Visible = false;
+                imgAnterior.Visible = false;
+                Application.DoEvents();
+                for (int j = 0; j < listRandom.Count(); j++)
+                {
+                    fondos[j].Click += new EventHandler(fondos_Click);
+                }
+                counter2 = 3;
+                timer2.Stop();
+            }
+        }
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            counter3--;
+            if (counter3 == 0)
+            {
+                CantClick = 0;
+                fotito.Visible = true;
+                picAnterior.Visible = true;
+                Application.DoEvents();
+                for (int j = 0; j < listRandom.Count(); j++)
+                {
+                    fondos[j].Click += new EventHandler(fondos_Click);
+                }
+                counter3 = 3;
+                timer3.Stop();
+            }
+        }    
     }
 }

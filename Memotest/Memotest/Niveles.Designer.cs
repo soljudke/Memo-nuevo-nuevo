@@ -45,7 +45,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(371, 98);
+            this.label1.Location = new System.Drawing.Point(475, 185);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 38);
             this.label1.TabIndex = 18;
@@ -66,7 +66,7 @@
             // 
             this.pic3.BackColor = System.Drawing.Color.Transparent;
             this.pic3.Enabled = false;
-            this.pic3.Location = new System.Drawing.Point(542, 165);
+            this.pic3.Location = new System.Drawing.Point(646, 252);
             this.pic3.Name = "pic3";
             this.pic3.Size = new System.Drawing.Size(100, 100);
             this.pic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -78,7 +78,7 @@
             // 
             this.pic2.BackColor = System.Drawing.Color.Transparent;
             this.pic2.Enabled = false;
-            this.pic2.Location = new System.Drawing.Point(412, 165);
+            this.pic2.Location = new System.Drawing.Point(516, 252);
             this.pic2.Name = "pic2";
             this.pic2.Size = new System.Drawing.Size(100, 100);
             this.pic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -90,7 +90,7 @@
             // 
             this.pic1.BackColor = System.Drawing.Color.Transparent;
             this.pic1.Enabled = false;
-            this.pic1.Location = new System.Drawing.Point(287, 165);
+            this.pic1.Location = new System.Drawing.Point(391, 252);
             this.pic1.Name = "pic1";
             this.pic1.Size = new System.Drawing.Size(100, 100);
             this.pic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
