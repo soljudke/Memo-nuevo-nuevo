@@ -39,7 +39,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Berlin Sans FB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(496, 264);
+            this.label3.Location = new System.Drawing.Point(665, 339);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 15);
             this.label3.TabIndex = 9;
@@ -52,7 +52,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.button1.FlatAppearance.BorderSize = 30;
             this.button1.Font = new System.Drawing.Font("Berlin Sans FB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(397, 299);
+            this.button1.Location = new System.Drawing.Point(566, 374);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 60);
             this.button1.TabIndex = 8;
@@ -65,7 +65,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Berlin Sans FB", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(256, 202);
+            this.label2.Location = new System.Drawing.Point(425, 277);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(344, 46);
             this.label2.TabIndex = 7;
@@ -73,7 +73,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(366, 262);
+            this.textBox1.Location = new System.Drawing.Point(535, 337);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(124, 20);
             this.textBox1.TabIndex = 6;
@@ -83,7 +83,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(301, 156);
+            this.label1.Location = new System.Drawing.Point(470, 231);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(244, 46);
             this.label1.TabIndex = 5;

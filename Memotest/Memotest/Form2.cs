@@ -177,6 +177,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer2.Start();
                            
 
@@ -192,6 +193,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer3.Start();
                         }
                     }
@@ -281,6 +283,7 @@ namespace Memotest
                 }
                 counter3 = 3;
                 timer3.Stop();
+                timer1.Start();
             }
         }
     }

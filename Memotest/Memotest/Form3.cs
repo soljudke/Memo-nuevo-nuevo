@@ -92,17 +92,17 @@ namespace Memotest
                 if (i2 >= 0 && i2 < 8)
                 {
 
-                    fondos[i2].Location = new Point(s, 84);
+                    fondos[i2].Location = new Point(s, 86);
                     s = fondos[i2].Right + 35;
                 }
                 if (i2 >= 8 && i2 < 16)
                 {
-                    fondos[i2].Location = new Point(j, 280);
+                    fondos[i2].Location = new Point(j, 282);
                     j = fondos[i2].Right + 35;
                 }
                 if (i2 >= 16 && i2 < listRandom.Count())
                 {
-                    fondos[i2].Location = new Point(z, 480);
+                    fondos[i2].Location = new Point(z, 482);
                     z = fondos[i2].Right + 35;
                 }
                 this.Controls.Add(fondos[i2]);
@@ -120,28 +120,28 @@ namespace Memotest
                 
                 if (i >= 0 && i < 8)
                 {
-                    estaPic.Location = new Point(x, 84);
+                    estaPic.Location = new Point(x, 86);
                     x = estaPic.Right + 35;
                 }
                 if (i >= 8 && i < 16)
                 {
-                    estaPic.Location = new Point(y, 280);
+                    estaPic.Location = new Point(y, 282);
                     y = estaPic.Right + 35;
 
                 }
                 if (i >= 16 && i < listRandom.Count())
                 {
-                    estaPic.Location = new Point(w, 480);
+                    estaPic.Location = new Point(w, 482);
                     w = estaPic.Right + 35;
                 }
                 this.Controls.Add(estaPic);
                 pictures[i] = estaPic;
             }
-
         }
         PictureBox picAnterior;
         PictureBox img;
-
+        PictureBox imgAnterior;
+        PictureBox fotito;
         private void pictureBox4_Click(object sender, EventArgs e)
         {
             Ayuda ayu = new Ayuda();
@@ -149,17 +149,12 @@ namespace Memotest
             ayu.ShowDialog();
             timer1.Start();
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
             Niveles el = new Niveles();
             el.Show();
             this.Close();
-        }
-
-        PictureBox imgAnterior;
-        PictureBox fotito;
+        }        
         protected void fondos_Click(object sender, EventArgs e)
         {
             var pic = sender as PictureBox;
@@ -191,6 +186,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer2.Start();
 
                         }
@@ -205,6 +201,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer3.Start();
                         }
                     }
@@ -280,6 +277,7 @@ namespace Memotest
                 }
                 counter3 = 3;
                 timer3.Stop();
+                timer1.Start();
             }
         }    
     }

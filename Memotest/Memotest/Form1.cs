@@ -127,7 +127,7 @@ namespace Memotest
         PictureBox picAnterior;
         PictureBox img;
         PictureBox imgAnterior;
-
+        PictureBox fotito;
         private void pictureBox4_Click(object sender, EventArgs e)
         {
             Ayuda ayu = new Ayuda();
@@ -135,15 +135,12 @@ namespace Memotest
             ayu.ShowDialog();
             timer1.Start();
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Niveles el = new Niveles();
             el.Show();
             this.Close();
-        }
-
-        PictureBox fotito;
+        }     
         protected void fondos_Click(object sender, EventArgs e)
         {
             var pic = sender as PictureBox;
@@ -175,6 +172,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer2.Start();
 
                         }
@@ -189,6 +187,7 @@ namespace Memotest
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
                             }
+                            timer1.Stop();
                             this.timer3.Start();
                             
                         }
@@ -280,6 +279,7 @@ namespace Memotest
                 }
                 counter3 = 3;
                 timer3.Stop();
+                timer1.Start();
             }
         }   
     }
