@@ -39,7 +39,7 @@ namespace Memotest
         {
             if (textBox1.Text != "")
             {
-                nombrecito = textBox1.Text;
+                nombrecito = textBox1.Text.ToLower();
                 Jugador jug = new Jugador();
                 jug.Jugadores();
                 foreach (Jugador juga in jug.Jugadores())

@@ -77,6 +77,11 @@ namespace Memotest
             this.Hide();
         }
 
-
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Usuario usu = new Usuario();
+            usu.Show();
+            this.Close();
+        }
     }
 }

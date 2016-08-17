@@ -181,6 +181,7 @@ namespace Memotest
 
                             (new SoundPlayer(Configuracion.RootFolder + "aplau.wav")).Play();
                             Ganando++;
+                            Aciertos++;
                             label3.Text = Ganando.ToString();
                             for (int j = 0; j < listRandom.Count(); j++)
                             {
@@ -260,6 +261,7 @@ namespace Memotest
                 }
                 counter2 = 3;
                 timer2.Stop();
+                timer1.Start();
             }
         }
         private void timer3_Tick(object sender, EventArgs e)

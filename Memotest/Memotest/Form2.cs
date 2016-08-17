@@ -172,6 +172,7 @@ namespace Memotest
                         {
                             (new SoundPlayer(Configuracion.RootFolder + "aplau.wav")).Play();
                             Ganando++;
+                            Aciertos++;
                             label3.Text = Aciertos.ToString();
                             for (int j = 0; j < listRandom.Count(); j++)
                             {

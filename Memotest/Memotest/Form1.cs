@@ -167,7 +167,8 @@ namespace Memotest
                             SoundPlayer simpleSound = (new SoundPlayer(Configuracion.RootFolder + "aplau.wav"));
                             simpleSound.Play();
                             Ganando++;
-                            label3.Text = Ganando.ToString();
+                            Aciertos++;
+                            label3.Text = Aciertos.ToString();
                             for (int j = 0; j < listRandom.Count(); j++)
                             {
                                 fondos[j].Click -= new EventHandler(fondos_Click);
