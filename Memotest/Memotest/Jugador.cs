@@ -23,6 +23,9 @@ namespace Memotest
 
         public void AbrirConexion()
         {
+
+
+
             Conn = new OleDbConnection(Configuracion.ConnectionString);
             Conn.Open();
         }
